@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight + 10,
+    paddingTop: Constants.statusBarHeight + 15,
   },
   scores: {
     flex: 1,
