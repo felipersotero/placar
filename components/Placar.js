@@ -5,8 +5,15 @@ import { Card, Paragraph, Title } from 'react-native-paper';
 export default function Placar(props) {
   return (
     <View style={styles.container}>
-        <View>
-  <Text>Time {props.title}</Text>
+        <View style={styles.team}>
+          <Text style={styles.teamText}>
+            Time {props.team}
+          </Text>
+        </View>
+        <View style={styles.value}>
+          <Text style={styles.valueText}>
+            {props.value}
+          </Text>
         </View>
     </View>
   );
@@ -17,13 +24,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#d9d9d9',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 100,
+    height: 200,
     margin: 10,
     padding: 10,
     borderRadius: 5,
+    borderWidth: 3,
+    borderTopColor: '#d9d9d9',
+    borderRightColor: '#d9d9d9',
+    borderLeftColor: '#ccc',
+    borderBottomColor: '#ccc'
   },
-  card: {
-      alignItems: 'center',
-      justifyContent: 'center',
+  team: {
+    flex: 1,
   },
+  teamText: {
+    fontSize: 38,
+  },
+  value: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  valueText: {
+    fontSize: 48,
+  }
 });
