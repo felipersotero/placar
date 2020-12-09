@@ -7,14 +7,17 @@ export default function Botoes(props) {
 
   return (
     <View style={styles.container}>
-        <Botao simbolo="+" cor="rgba(00, 255, 00, 0.5)" borda="rgba(00, 255, 00, 0.8)" clique={props.aumentar} />
-        <Botao simbolo="-" cor="rgba(255, 00, 00, 0.5)" borda="rgba(255, 00, 00, 0.8)" clique={props.diminuir} />
+        <Botao simbolo="+" cor="rgba(35, 186, 38, 0.7)" borda="rgba(13, 92, 14, 0.5)" clique={props.aumentar} />
+        <Botao simbolo="-" cor="rgba(235, 26, 26, 0.7)" borda="rgba(181, 22, 22, 0.5)" clique={props.diminuir} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
     }
 });
