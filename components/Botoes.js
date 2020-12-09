@@ -7,8 +7,8 @@ export default function Botoes(props) {
 
   return (
     <View style={styles.container}>
-        <Botao simbolo="+" cor="#0f0" clique={props.aumentar} />
-        <Botao simbolo="-" cor="#f00" clique={props.diminuir} />
+        <Botao simbolo="+" cor="rgba(00, 255, 00, 0.5)" borda="rgba(00, 255, 00, 0.8)" clique={props.aumentar} />
+        <Botao simbolo="-" cor="rgba(255, 00, 00, 0.5)" borda="rgba(255, 00, 00, 0.8)" clique={props.diminuir} />
     </View>
   );
 }
