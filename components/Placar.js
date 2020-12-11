@@ -7,7 +7,7 @@ export default function Placar(props) {
     <View style={styles.container}>
         <View style={styles.team}>
           <Text style={styles.teamText}>
-            Time {props.team}
+            {props.team}
           </Text>
         </View>
         <View style={styles.value}>
@@ -21,6 +21,7 @@ export default function Placar(props) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#d9d9d9',
     alignItems: 'center',
     justifyContent: 'center',

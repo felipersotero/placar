@@ -1,38 +1,47 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Dimensions, TextInput } from 'react-native';
 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
+
+import variables from '../variables';
 
 const {height, width} = Dimensions.get('window');
 
 export default function Configuracoes(props) {
 
+  const[nome1, setNome1] = useState('');
+  const[nome2, setNome2] = useState('');
+
+  variables.nomeEd1 = nome1;
+  variables.nomeEd2 = nome2;
+
   return (
-
     <View style={styles.container}>
-        <View style={styles.insert}>
-            <View style={styles.edit}>
-                <Text>Nome do Time 1:</Text>
-                <TextInput style={{height: 50}} />
-            </View>
-            <View></View>
-            <View style={styles.edit}>
-                <Text>Nome do Time 2:</Text>
-                <TextInput style={{height: 50}} />
-            </View>
+      <View style={styles.insert}>
+        <View style={styles.edit}>
+          <Text style={styles.text}>Nome do Time 1:</Text>
+          <TextInput style={styles.input} placeholder={variables.nome1} onChangeText={text => setNome1(text)} />
         </View>
-        <View style={styles.footer}>
-            <TouchableOpacity style={styles.button} onPress={props.sair}>
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Descartar</Text>
-                <MaterialCommunityIcons name="trash-can" size={24} color='white' />
-            </TouchableOpacity> 
-            <TouchableOpacity style={styles.button} onPress={props.sair}>
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Salvar</Text>
-                <MaterialCommunityIcons name="content-save" size={24} color='white' />
-            </TouchableOpacity>    
+        <View></View>
+        <View style={styles.edit}>
+          <Text style={styles.text}>Nome do Time 2:</Text>
+          <TextInput style={styles.input} placeholder={variables.nome2} onChangeText={text => setNome2(text)}/>
         </View>
-
+        <View>
+          <Text>{nome1}</Text>
+          <Text>{nome2}</Text>
+        </View>
+      </View>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.button} onPress={props.sair}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Descartar</Text>
+          <MaterialCommunityIcons name="trash-can" size={24} color='white' />
+        </TouchableOpacity> 
+        <TouchableOpacity style={styles.button} onPress={props.salvar}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>Salvar</Text>
+          <MaterialCommunityIcons name="content-save" size={24} color='white' />
+        </TouchableOpacity>    
+      </View>
     </View>
   );
 }
@@ -40,7 +49,7 @@ export default function Configuracoes(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#a6a6a6',
+        backgroundColor: '#ccc',
         width: width*0.95,
         height: height*0.75,
         margin: 10,
@@ -54,6 +63,20 @@ const styles = StyleSheet.create({
     edit: {
         padding: 20,
     },
+    text: {
+        marginVertical: 10,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'black'
+    },
+    input: {
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        borderColor: '#848484',
+        borderWidth: 1,
+        paddingHorizontal: 8,
+    },
     footer: {
         flex: 1,
         flexDirection: 'row',
@@ -62,7 +85,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     button: {
-        backgroundColor: 'blue',
+        backgroundColor: '#3a6ce0',
         flexDirection: 'row',
         borderRadius: 40,
         width: 150,

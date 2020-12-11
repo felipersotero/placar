@@ -11,11 +11,16 @@ import Placar from './components/Placar';
 import Botoes from './components/Botoes';
 import Configuracoes from './components/Configuracoes';
 
+import variables from './variables';
+
 export default function App() {
 
   const[placar1, setPlacar1] = useState(0);
   const[placar2, setPlacar2] = useState(0);
   const[visible, setVisible] = useState(false);
+
+  const nome1 = variables.nome1;
+  const nome2 = variables.nome2;
 
   //funcoes de modificar o placar
 
@@ -48,6 +53,18 @@ export default function App() {
   //   setVisible(false)
   // }
 
+  function configurar(){
+    if (variables.nomeEd1 == ""){
+      variables.nome1 = "Time 1"
+    } else{variables.nome1 = variables.nomeEd1}
+
+    if (variables.nomeEd2 == ""){
+      variables.nome2 = "Time 2"
+    } else{variables.nome2 = variables.nomeEd2}
+
+    hideConfig()
+  }
+
   return (
     <View style={styles.container} >
       <View style={styles.header}> 
@@ -61,9 +78,9 @@ export default function App() {
         </View>
       </View>
       <View style={styles.scores}>
-        <Placar team={1} value={placar1} />
+        <Placar team={nome1} value={placar1} />
         <Text style={{fontSize: 36}}>X</Text>
-        <Placar team={2} value={placar2} />
+        <Placar team={nome2} value={placar2} />
       </View>
       <View style={styles.buttons}>
         <Botoes aumentar={aumentar1} diminuir={diminuir1} />
@@ -71,7 +88,7 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
       <View style={{position: 'absolute'}}>
-        {visible && <Configuracoes sair={hideConfig} />}
+        {visible && <Configuracoes sair={hideConfig} salvar={configurar} />}
       </View>
     </View>
   );
