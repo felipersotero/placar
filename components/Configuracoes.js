@@ -7,6 +7,18 @@ import variables from '../variables';
 
 const {height, width} = Dimensions.get('window');
 
+function Cores(props){
+  return(
+    <View style={styles.colors}>
+      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[0]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(0, props.j)}></TouchableOpacity>
+      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[1]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(1, props.j)}></TouchableOpacity>
+      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[2]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(2, props.j)}></TouchableOpacity> 
+      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[3]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(3, props.j)}></TouchableOpacity>
+      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[4]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(4, props.j)}></TouchableOpacity>
+    </View>
+  );
+}
+
 export default function Configuracoes(props) {
 
   const[nome1, setNome1] = useState('');
@@ -22,15 +34,12 @@ export default function Configuracoes(props) {
           <Text style={styles.text}>Nome do Time 1:</Text>
           <TextInput style={styles.input} placeholder={variables.nome1} onChangeText={text => setNome1(text)} />
         </View>
-        <View></View>
+        <Cores j={1} colorir={props.colorir} borda={props.borda} />
         <View style={styles.edit}>
           <Text style={styles.text}>Nome do Time 2:</Text>
           <TextInput style={styles.input} placeholder={variables.nome2} onChangeText={text => setNome2(text)}/>
         </View>
-        <View>
-          <Text>{nome1}</Text>
-          <Text>{nome2}</Text>
-        </View>
+        <Cores j={2} colorir={props.colorir} borda={props.borda} />
       </View>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.button} onPress={props.sair}>
@@ -61,7 +70,8 @@ const styles = StyleSheet.create({
         flex: 5,
     },
     edit: {
-        padding: 20,
+      flex: 5,
+      padding: 20,
     },
     text: {
         marginVertical: 10,
@@ -76,6 +86,18 @@ const styles = StyleSheet.create({
         borderColor: '#848484',
         borderWidth: 1,
         paddingHorizontal: 8,
+    },
+    colors: {
+      flex: 3,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center'
+    },
+    color: {
+      height: 50,
+      width: 50,
+      borderRadius: 50,
+      borderColor: '#848484'
     },
     footer: {
         flex: 1,

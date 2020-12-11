@@ -4,7 +4,7 @@ import { Card, Paragraph, Title } from 'react-native-paper';
 
 export default function Placar(props) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: props.cor}]}>
         <View style={styles.team}>
           <Text style={styles.teamText}>
             {props.team}
@@ -22,7 +22,6 @@ export default function Placar(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d9d9d9',
     alignItems: 'center',
     justifyContent: 'center',
     height: 200,

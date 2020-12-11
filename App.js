@@ -19,9 +19,6 @@ export default function App() {
   const[placar2, setPlacar2] = useState(0);
   const[visible, setVisible] = useState(false);
 
-  const nome1 = variables.nome1;
-  const nome2 = variables.nome2;
-
   //funcoes de modificar o placar
 
   function aumentar1(){
@@ -62,7 +59,16 @@ export default function App() {
       variables.nome2 = "Time 2"
     } else{variables.nome2 = variables.nomeEd2}
 
+    variables.cor1 = variables.corEd1
+    variables.cor2 = variables.corEd2
+
     hideConfig()
+  }
+
+  function colorir(c, j){
+    if(j==1){
+      variables.corEd1 = variables.cores[c]
+    } else {variables.corEd2 = variables.cores[c]}
   }
 
   return (
@@ -78,9 +84,9 @@ export default function App() {
         </View>
       </View>
       <View style={styles.scores}>
-        <Placar team={nome1} value={placar1} />
+        <Placar team={variables.nome1} value={placar1} cor={variables.cor1} />
         <Text style={{fontSize: 36}}>X</Text>
-        <Placar team={nome2} value={placar2} />
+        <Placar team={variables.nome2} value={placar2} cor={variables.cor2} />
       </View>
       <View style={styles.buttons}>
         <Botoes aumentar={aumentar1} diminuir={diminuir1} />
@@ -88,7 +94,7 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
       <View style={{position: 'absolute'}}>
-        {visible && <Configuracoes sair={hideConfig} salvar={configurar} />}
+        {visible && <Configuracoes sair={hideConfig} salvar={configurar} colorir={(c,j) => colorir(c,j)} borda={variables.bordas[0]} />}
       </View>
     </View>
   );
