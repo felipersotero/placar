@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
 
 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
@@ -65,11 +65,15 @@ export default function App() {
     hideConfig()
   }
 
-  function colorir(c, j){
-    if(j==1){
-      variables.corEd1 = variables.cores[c]
-    } else {variables.corEd2 = variables.cores[c]}
-  }
+  // function colorir(c, j){
+
+  //   //Alert.alert(j + " " + c + "borda" + variables.bordas[j - 1][c]) 
+  //   //variables.bordas[j - 1][c] = 3
+
+  //   if(j==1){
+  //     variables.corEd1 = c
+  //   } else {variables.corEd2 = c}
+  // }
 
   return (
     <View style={styles.container} >
@@ -94,7 +98,7 @@ export default function App() {
       </View>
       <StatusBar style="auto" />
       <View style={{position: 'absolute'}}>
-        {visible && <Configuracoes sair={hideConfig} salvar={configurar} colorir={(c,j) => colorir(c,j)} borda={variables.bordas[0]} />}
+        {visible && <Configuracoes sair={hideConfig} salvar={configurar} /* colorir={(c,j) => colorir(c,j)} */ />}
       </View>
     </View>
   );

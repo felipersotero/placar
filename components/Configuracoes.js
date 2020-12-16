@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert, Dimensions, TextInput } from 'react-native';
 
 import {MaterialCommunityIcons} from '@expo/vector-icons'
@@ -8,13 +8,21 @@ import variables from '../variables';
 const {height, width} = Dimensions.get('window');
 
 function Cores(props){
+
+  const[borda, setBorda] = useState([[1,1,1,1,1],[1,1,1,1,1]]);
+
+  //  function clique(c, j){
+      
+  //     props.colorir(c, j)
+  //  }
+
   return(
     <View style={styles.colors}>
-      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[0]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(0, props.j)}></TouchableOpacity>
-      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[1]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(1, props.j)}></TouchableOpacity>
-      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[2]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(2, props.j)}></TouchableOpacity> 
-      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[3]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(3, props.j)}></TouchableOpacity>
-      <TouchableOpacity style={[styles.color, {backgroundColor: variables.cores[4]}, {borderWidth: props.borda}]} onPress={(c, j) => props.colorir(4, props.j)}></TouchableOpacity>
+      {variables.cores.map((e,i)=> {
+        return(
+          <TouchableOpacity key={i} style={[styles.color, {backgroundColor: e}, {borderWidth: props.selected == i ? 4 : 1}]} onPress={(c, j) => props.colorir(i, props.j)}></TouchableOpacity>
+        )
+      })}
     </View>
   );
 }
@@ -23,9 +31,27 @@ export default function Configuracoes(props) {
 
   const[nome1, setNome1] = useState('');
   const[nome2, setNome2] = useState('');
+  const[indice1, setIndice1] = useState(0);
+  const[indice2, setIndice2] = useState(0);
 
   variables.nomeEd1 = nome1;
   variables.nomeEd2 = nome2;
+
+  useEffect(()=>{
+    setIndice1(variables.cores.indexOf(variables.cor1))
+    setIndice2(variables.cores.indexOf(variables.cor2))
+  },[])
+
+  function colorir(c, j){
+
+    if(j==1){
+      variables.corEd1 = variables.cores[c];
+      setIndice1(c)
+    } else {
+      variables.corEd2 = variables.cores[c];
+      setIndice2(c)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -34,12 +60,12 @@ export default function Configuracoes(props) {
           <Text style={styles.text}>Nome do Time 1:</Text>
           <TextInput style={styles.input} placeholder={variables.nome1} onChangeText={text => setNome1(text)} />
         </View>
-        <Cores j={1} colorir={props.colorir} borda={props.borda} />
+        <Cores j={1} colorir={(c,j) => colorir(c,j)} selected={indice1} />
         <View style={styles.edit}>
           <Text style={styles.text}>Nome do Time 2:</Text>
           <TextInput style={styles.input} placeholder={variables.nome2} onChangeText={text => setNome2(text)}/>
         </View>
-        <Cores j={2} colorir={props.colorir} borda={props.borda} />
+        <Cores j={2} colorir={(c,j) => colorir(c,j)} selected={indice2} />
       </View>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.button} onPress={props.sair}>
